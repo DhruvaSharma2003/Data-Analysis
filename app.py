@@ -2,6 +2,11 @@
 import streamlit as st
 from datetime import datetime
 import pandas as pd
+from data_loader import load_excel_data
+from utils.trends import get_monthly_stream_totals
+
+data = load_excel_data()
+monthly_df = get_monthly_stream_totals(data["Streams"])
 
 # Page configuration
 st.set_page_config(
