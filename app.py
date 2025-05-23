@@ -9,7 +9,7 @@ from utils.trends import get_monthly_stream_totals
 from utils.languages import get_top_language_trends
 from utils.groups import get_top_groups_trend
 from utils.tracks import get_top_tracks, get_genre_trends
-
+from utils.strategy import generate_subscription_suggestions
 
 # Streamlit page config
 st.set_page_config(
@@ -83,6 +83,20 @@ with tabs[3]:
     fig = px.bar(genre_df, x="Genre", y="Playcount", title="Playcount by Genre", text_auto=True)
     st.plotly_chart(fig, use_container_width=True)
 
+# ------------------ TAB 4: Final Strategy ------------------
+with tab[4]:
+    st.subheader("Smart Subscription Strategy")
+    st.markdown("Use these data-backed ideas to build custom devotional subscription offerings.")
+
+    # Generate suggestions
+    strategy_points = generate_subscription_suggestions(
+        monthly_df,
+        top_groups_df,
+        lang_trends
+    )
+
+    for point in strategy_points:
+        st.markdown(f"- {point}")
 
     
 
