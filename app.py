@@ -6,6 +6,10 @@ import plotly.express as px
 # Load modular functions
 from data_loader import load_excel_data
 from utils.trends import get_monthly_stream_totals
+from utils.languages import get_top_language_trends
+from utils.groups import get_top_groups_trend
+from utils.tracks import get_top_tracks, get_genre_trends
+
 
 # Streamlit page config
 st.set_page_config(
@@ -59,6 +63,26 @@ with tabs[2]:
     fig = px.line(lang_trends, x="Month", y="Streams", color="Language", markers=True,
                   title=f"Top {top_n_lang} Languages - Monthly Streaming Trend")
     st.plotly_chart(fig, use_container_width=True)
+
+# ------------------ TAB 3: Top tracks and genre trend ------------------
+with tabs[3]:
+    st.subheader("Top Tracks & Genre Trends")
+    st.markdown("Explore the most played devotional tracks and genre-level popularity.")
+
+    pdl_df = data["PDL"]
+
+    # Display top tracks
+    st.markdown("### 🎧 Top Tracks by Playcount")
+    top_n = st.slider("Select Number of Top Tracks", 5, 20, 10)
+    top_tracks_df = get_top_tracks(pdl_df, top_n=top_n)
+    st.dataframe(top_tracks_df[["Title", "Album", "Language", "Genre", "Playcount"]])
+
+    # Display genre-wise playcount
+    st.markdown("### 🎼 Genre Popularity")
+    genre_df = get_genre_trends(pdl_df)
+    fig = px.bar(genre_df, x="Genre", y="Playcount", title="Playcount by Genre", text_auto=True)
+    st.plotly_chart(fig, use_container_width=True)
+
 
     
 
