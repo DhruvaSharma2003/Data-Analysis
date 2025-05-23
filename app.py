@@ -22,7 +22,7 @@ st.set_page_config(
 data = load_excel_data()
 
 # Create tabs
-tabs = st.tabs(["📈 Monthly Trends", "🎵 Top Groups", "🗣️ Language Insights", "🎧 Top Tracks", "💡 Strategy"])
+tabs = st.tabs(["📈 Monthly Trends", "🎵 Top Groups", "🗣️ Language Insights", "🎧 Top Tracks", "💡 Strategy", "Debug"])
 
 # ------------------ TAB 0: Monthly Trends ------------------
 with tabs[0]:
@@ -97,6 +97,11 @@ with tabs[4]:
 
     for point in strategy_points:
         st.markdown(f"- {point}")
+
+with tabs[5]:
+    st.write("Streams Columns:", data["Streams"].columns.tolist())
+    st.write("LanguageWise Columns:", data["LanguageWise"].columns.tolist())
+
 
     
 
