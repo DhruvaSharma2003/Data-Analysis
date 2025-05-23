@@ -84,7 +84,7 @@ with tabs[3]:
     st.plotly_chart(fig, use_container_width=True)
 
 # ------------------ TAB 4: Final Strategy ------------------
-with tab[4]:
+with tabs[4]:
     st.subheader("Smart Subscription Strategy")
     st.markdown("Use these data-backed ideas to build custom devotional subscription offerings.")
 
